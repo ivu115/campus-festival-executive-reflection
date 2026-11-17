@@ -1,0 +1,1129 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>キャンパス祭 執行部振り返りフォーム</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f4f2ec;
+        --surface: #ffffff;
+        --surface-2: #faf8f3;
+        --ink: #1d2129;
+        --ink-2: #4a4f58;
+        --ink-3: #767c88;
+        --line: #ddd8cc;
+        --line-strong: #c9c2b2;
+        --accent: #b3352b;
+        --accent-ink: #8f271f;
+        --accent-soft: #f9ecea;
+        --good: #1e7a4f;
+        --good-soft: #e7f3ec;
+        --warn: #a05c00;
+        --warn-soft: #faf0dd;
+        --bad: #b3352b;
+        --bad-soft: #f9ecea;
+        --focus: #2563eb;
+        --shadow: 0 1px 2px rgba(29, 33, 41, .06), 0 8px 24px rgba(29, 33, 41, .05);
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #17181c;
+          --surface: #212329;
+          --surface-2: #26282f;
+          --ink: #eceef2;
+          --ink-2: #b9bec9;
+          --ink-3: #8b919e;
+          --line: #3a3d46;
+          --line-strong: #4a4e59;
+          --accent: #e0685c;
+          --accent-ink: #f0938a;
+          --accent-soft: #3a2422;
+          --good: #5cc48d;
+          --good-soft: #1e3229;
+          --warn: #e0a44a;
+          --warn-soft: #382c1a;
+          --bad: #e0685c;
+          --bad-soft: #3a2422;
+          --focus: #7aa5ff;
+          --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+          color-scheme: dark;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
+        font-size: 15px;
+        line-height: 1.75;
+      }
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
+      .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px 96px; }
+
+      /* ---------- header ---------- */
+      header.page-head { padding: 34px 0 6px; }
+      .head-rule { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+      .head-rule::before, .head-rule::after { content: ""; height: 2px; background: var(--accent); flex: 1; }
+      .head-rule span { font-size: 12px; letter-spacing: .28em; font-weight: 700; color: var(--accent-ink); }
+      h1 {
+        font-family: "Noto Serif JP", serif;
+        font-weight: 900;
+        font-size: clamp(26px, 6vw, 38px);
+        line-height: 1.35;
+        margin: 0 0 10px;
+        letter-spacing: .02em;
+      }
+      .lede { color: var(--ink-2); margin: 0 0 18px; max-width: 44em; }
+      .note-box {
+        background: var(--accent-soft);
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--accent);
+        border-radius: 6px;
+        padding: 12px 16px;
+        font-size: 14px;
+        color: var(--ink);
+      }
+      .note-box strong { color: var(--accent-ink); }
+
+      /* ---------- sticky summary ---------- */
+      .summary-bar {
+        position: sticky; top: 0; z-index: 20;
+        margin: 20px -16px 0; padding: 10px 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line-strong);
+        box-shadow: var(--shadow);
+      }
+      .summary-inner { max-width: 920px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline; }
+      .summary-inner .lab { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--ink-3); margin-right: 2px; }
+      .summary-inner .val { font-weight: 900; font-size: 17px; font-variant-numeric: tabular-nums; }
+      .summary-inner .val.profit { color: var(--good); }
+      .summary-inner .val.profit.neg { color: var(--bad); }
+      .summary-inner .unit { font-size: 12px; color: var(--ink-3); font-weight: 500; }
+
+      /* ---------- sections ---------- */
+      section.card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        margin-top: 22px;
+        padding: 22px 22px 26px;
+      }
+      .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+      .sec-num {
+        font-family: "Noto Serif JP", serif;
+        font-weight: 900; font-size: 22px; color: var(--accent);
+        line-height: 1;
+      }
+      h2 { font-size: 19px; font-weight: 900; margin: 0; letter-spacing: .02em; }
+      .sec-desc { color: var(--ink-2); font-size: 13.5px; margin: 2px 0 16px; }
+      h3.sub { font-size: 15px; font-weight: 700; margin: 22px 0 8px; padding-top: 16px; border-top: 1px dashed var(--line-strong); }
+      h3.sub:first-of-type { border-top: none; padding-top: 0; }
+
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+      .grid .full { grid-column: 1 / -1; }
+      @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+      label.flabel { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+      label.flabel .req { color: var(--accent); font-size: 11px; margin-left: 4px; }
+      label.flabel .hint { display: block; font-weight: 400; color: var(--ink-3); font-size: 12px; margin-top: 1px; }
+      input[type="text"], input[type="number"], input[type="date"], select, textarea {
+        width: 100%;
+        font: inherit; font-size: 15px;
+        color: var(--ink);
+        background: var(--surface-2);
+        border: 1px solid var(--line-strong);
+        border-radius: 6px;
+        padding: 8px 11px;
+      }
+      input[type="number"] { text-align: right; font-variant-numeric: tabular-nums; }
+      textarea { min-height: 84px; resize: vertical; line-height: 1.7; text-align: left; }
+      textarea.tall { min-height: 120px; }
+      input:focus, select:focus, textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; border-color: var(--focus); }
+      .yen-wrap { position: relative; }
+      .yen-wrap input { padding-right: 34px; }
+      .yen-wrap::after { content: "円"; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-3); font-size: 13px; pointer-events: none; }
+      .nin-wrap { position: relative; }
+      .nin-wrap input { padding-right: 34px; }
+      .nin-wrap::after { content: "人"; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); color: var(--ink-3); font-size: 13px; pointer-events: none; }
+
+      .calc-out {
+        background: var(--surface-2);
+        border: 1px dashed var(--line-strong);
+        border-radius: 6px;
+        padding: 8px 12px;
+        min-height: 44px;
+        display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      }
+      .calc-out .k { font-size: 12.5px; color: var(--ink-2); font-weight: 700; }
+      .calc-out .v { font-weight: 900; font-size: 17px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+      .calc-out .v.good { color: var(--good); }
+      .calc-out .v.bad { color: var(--bad); }
+      .field-note { font-size: 12.5px; color: var(--ink-2); margin: 7px 0 0; line-height: 1.65; }
+      .field-note strong { color: var(--good); font-variant-numeric: tabular-nums; }
+
+      /* ---------- rating ---------- */
+      .rate-group { display: flex; flex-wrap: wrap; gap: 6px; }
+      .rate-group label {
+        position: relative; cursor: pointer;
+      }
+      .rate-group input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+      .rate-group .chip {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 40px; padding: 6px 14px;
+        border: 1px solid var(--line-strong); border-radius: 999px;
+        background: var(--surface-2); font-size: 13.5px; font-weight: 500; color: var(--ink-2);
+      }
+      .rate-group input:checked + .chip { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+      .rate-group input:focus-visible + .chip { outline: 2px solid var(--focus); outline-offset: 2px; }
+      .rate-row { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+      .rate-row:last-child { border-bottom: none; }
+      .rate-row .q { font-size: 14px; font-weight: 700; }
+      .rate-row .q .hint { display: block; font-weight: 400; color: var(--ink-3); font-size: 12px; }
+
+      /* ---------- store table ---------- */
+      .store-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      .store-table th { text-align: left; font-size: 12px; color: var(--ink-2); border-bottom: 2px solid var(--line-strong); padding: 6px 6px; white-space: nowrap; }
+      .store-table th.num, .store-table td.num { text-align: right; }
+      .store-table td { padding: 6px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+      .store-table input { padding: 6px 9px; font-size: 14px; }
+      .store-table input[type="number"] { min-width: 96px; }
+      .store-table .row-profit { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+      .store-table .row-profit.neg { color: var(--bad); }
+      .store-table tfoot td { border-top: 2px solid var(--line-strong); border-bottom: none; font-weight: 900; font-variant-numeric: tabular-nums; }
+      .row-del {
+        border: 1px solid var(--line-strong); background: var(--surface-2); color: var(--ink-2);
+        border-radius: 6px; min-width: 40px; min-height: 40px; font-size: 16px; cursor: pointer; line-height: 1;
+      }
+      .row-del:hover { color: var(--bad); border-color: var(--bad); }
+      @media (max-width: 640px) {
+        .store-table, .store-table thead, .store-table tbody, .store-table tfoot, .store-table tr, .store-table td { display: block; width: 100%; }
+        .store-table thead { display: none; }
+        .store-table tbody tr { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; background: var(--surface-2); }
+        .store-table td { border: none; padding: 4px 0; display: flex; align-items: center; gap: 10px; }
+        .store-table td::before { content: attr(data-th); font-size: 12px; font-weight: 700; color: var(--ink-2); flex: 0 0 64px; }
+        .store-table td.num { text-align: left; }
+        .store-table td.del-cell { justify-content: flex-end; }
+        .store-table td.del-cell::before { content: ""; flex: none; }
+        .store-table tfoot tr { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+        .store-table tfoot td { display: inline-block; width: auto; }
+        .store-table tfoot td::before { content: ""; }
+      }
+
+      .btn {
+        font: inherit; font-weight: 700; font-size: 14px;
+        border-radius: 8px; cursor: pointer;
+        padding: 10px 18px; min-height: 44px;
+        border: 1px solid var(--line-strong);
+        background: var(--surface); color: var(--ink);
+      }
+      .btn:hover { border-color: var(--ink-3); }
+      .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .btn.primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+      .btn.ghost { background: transparent; }
+      .add-row-btn { margin-top: 12px; }
+
+      /* ---------- output ---------- */
+      .out-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+      #outputText {
+        width: 100%; min-height: 260px; margin-top: 16px;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 13px; line-height: 1.7; white-space: pre-wrap;
+      }
+      .toast {
+        position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+        background: var(--ink); color: var(--bg);
+        padding: 10px 20px; border-radius: 999px; font-size: 14px; font-weight: 700;
+        opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 50;
+        max-width: calc(100vw - 32px); text-align: center;
+      }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+      .foot-note { color: var(--ink-3); font-size: 12.5px; margin-top: 26px; text-align: center; }
+
+      @media print {
+        .summary-bar, .out-actions, .add-row-btn, .row-del, .toast { display: none !important; }
+        body { background: #fff; }
+        section.card { box-shadow: none; break-inside: avoid; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .toast { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="head-rule"><span>執行部 振り返り</span></div>
+        <h1>キャンパス祭 執行部<br />振り返りフォーム</h1>
+        <p class="lede">来場者数や売上・費用・利益などの数値面と、シフト編成、企業・事務局との連携をまとめて振り返るための、執行部専用フォームです。数字を入れる欄は自動で集計されます。</p>
+        <div class="note-box">
+          <strong>記入のしかた：</strong>このフォームは、執行部で話し合いながら<strong>グループで記入しても、役職ごとに個人で記入して提出してもかまいません</strong>。個人で記入する場合は「参加メンバー」欄は空欄のままでOKです。分からない数値は空欄のままにして、備考に理由を書いてください。
+        </div>
+      </header>
+
+      <div class="summary-bar" aria-label="集計サマリー">
+        <div class="summary-inner">
+          <span><span class="lab">来場者</span><span class="val" id="sumVisitors">―</span><span class="unit"> 人</span></span>
+          <span><span class="lab">総売上</span><span class="val" id="sumRevenue">―</span><span class="unit"> 円</span></span>
+          <span><span class="lab">総費用</span><span class="val" id="sumCost">―</span><span class="unit"> 円</span></span>
+          <span><span class="lab">総利益</span><span class="val profit" id="sumProfit">―</span><span class="unit"> 円</span></span>
+        </div>
+      </div>
+
+      <form id="reviewForm" novalidate>
+        <!-- 1 記入者 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">1</span><h2>記入者・参加メンバー</h2></div>
+          <p class="sec-desc">個人で記入する場合は、記入者名と役職だけ書いて進めてください。</p>
+          <div class="grid">
+            <div>
+              <label class="flabel" for="f-name">記入者名<span class="req">必須</span></label>
+              <input type="text" id="f-name" autocomplete="name" placeholder="例：田村 威生" />
+            </div>
+            <div>
+              <label class="flabel" for="f-role">役職・担当</label>
+              <input type="text" id="f-role" placeholder="例：副委員長／会計" />
+            </div>
+            <div class="full">
+              <label class="flabel" for="f-members">参加メンバー<span class="hint">グループで話し合って記入した場合のみ。個人記入の場合は空欄でOKです。</span></label>
+              <input type="text" id="f-members" placeholder="例：委員長、会計、渉外担当…" />
+            </div>
+            <div>
+              <label class="flabel" for="f-date">記入日</label>
+              <input type="date" id="f-date" />
+            </div>
+            <div>
+              <label class="flabel" for="f-event-date">開催日</label>
+              <input type="text" id="f-event-date" placeholder="例：2026年11月◯日〜◯日" />
+            </div>
+          </div>
+        </section>
+
+        <!-- 2 数値サマリー -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">2</span><h2>数値サマリー</h2></div>
+          <p class="sec-desc">祭全体の数字です。実績を入れると、利益や利益率が自動で計算されます。</p>
+          <div class="grid">
+            <div>
+              <label class="flabel" for="n-vis-real">来場者数</label>
+              <div class="nin-wrap"><input type="number" id="n-vis-real" inputmode="numeric" min="0" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="n-staff">運営スタッフ総数<span class="hint">実行委員＋当日のボランティア等</span></label>
+              <div class="nin-wrap"><input type="number" id="n-staff" inputmode="numeric" min="0" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="n-booths">出店・企画数<span class="hint">模擬店・ステージ・展示などの合計</span></label>
+              <input type="number" id="n-booths" inputmode="numeric" min="0" placeholder="0" style="text-align:right" />
+            </div>
+            <div>
+              <label class="flabel" for="n-rev-real">総売上</label>
+              <div class="yen-wrap"><input type="number" id="n-rev-real" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="n-cost">総費用</label>
+              <div class="yen-wrap"><input type="number" id="n-cost" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div>
+              <span class="flabel">総利益（自動計算）</span>
+              <div class="calc-out"><span class="k">総売上 − 総費用</span><span class="v" id="c-profit">―</span></div>
+              <p class="field-note">確定実績：模擬店総利益 <strong>152,225円</strong>（総売上・総費用は未集計のため、上の自動計算とは別に記録しています）</p>
+            </div>
+            <div>
+              <span class="flabel">利益率（自動計算）</span>
+              <div class="calc-out"><span class="k">総利益 ÷ 総売上</span><span class="v" id="c-margin">―</span></div>
+            </div>
+            <div>
+              <span class="flabel">来場者1人あたり売上（自動計算）</span>
+              <div class="calc-out"><span class="k">総売上 ÷ 来場者数</span><span class="v" id="c-per-visitor">―</span></div>
+            </div>
+            <div class="full">
+              <label class="flabel" for="n-note">数値についての備考<span class="hint">数え方（延べ人数／実人数）、集計の根拠、未確定の数字などがあれば。</span></label>
+              <textarea id="n-note" placeholder="例：来場者数は入場ゲートのカウンター集計（延べ）。◯◯店の売上は精算待ちのため概算。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 店舗・企画別 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">3</span><h2>店舗・企画別の売上と費用</h2></div>
+          <p class="sec-desc">飲食の模擬店4店舗（焼き鳥・チュロス・フランクフルト・ラムネ）と、企画系7件（ストラックアウト・輪投げ・スーパーボールすくい・抽選会・MIZUNOワークショップ・VR・500歩サッカー）をあらかじめ行に入れています。店舗・企画ごとに1行ずつ記入してください。利益は自動計算され、合計は上の「数値サマリー」とは別に集計されます（照合用）。行の追加・削除もできます。<strong>飲食4店舗の費用は、開催前の打合せ時点の仕入れ見込み額を初期値として入れています（実績ではありません）。実績に合わせて上書きしてください。</strong>売上欄は実績が分かるまで空欄のままにしています。</p>
+          <table class="store-table" id="storeTable">
+            <thead>
+              <tr>
+                <th>店舗・企画名</th>
+                <th class="num">売上（円）</th>
+                <th class="num">費用（円）</th>
+                <th class="num">利益（円）</th>
+                <th aria-label="削除"></th>
+              </tr>
+            </thead>
+            <tbody id="storeBody"></tbody>
+            <tfoot>
+              <tr>
+                <td>合計</td>
+                <td class="num" id="t-rev">―</td>
+                <td class="num" id="t-cost">―</td>
+                <td class="num" id="t-profit">―</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+          <button type="button" class="btn add-row-btn" id="addStoreBtn">＋ 行を追加</button>
+          <p class="field-note">費用の初期値の内訳（打合せ時点の見込み）：焼き鳥 18,300円（本体6箱分。塩コショウ代は別途）／チュロス 14,690円（本体8,030円＋オーブントースターレンタル6,660円）／フランクフルト 48,350円（大フランク約27,000円＋ミニフランク約13,000円＋ケチャップ＆マスタード4,350円＋発泡トレイ約4,000円）／ラムネ 21,000円（210本分）</p>
+
+          <h3 class="sub">費用の内訳（主なもの）</h3>
+          <div class="grid">
+            <div>
+              <label class="flabel" for="c-material">食材・材料費</label>
+              <div class="yen-wrap"><input type="number" id="c-material" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="c-rental">備品・レンタル費</label>
+              <div class="yen-wrap"><input type="number" id="c-rental" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="c-print">印刷・広報費</label>
+              <div class="yen-wrap"><input type="number" id="c-print" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="c-other">その他</label>
+              <div class="yen-wrap"><input type="number" id="c-other" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div class="full">
+              <label class="flabel" for="c-note">費用についてのメモ<span class="hint">想定より膨らんだ費目、来年削れる／増やすべき費目など。</span></label>
+              <textarea id="c-note" placeholder="例：当日の追加仕入れで材料費が予算超過。来年は事前予約制にしてロスを減らす。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4 売上面 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">4</span><h2>売上面の振り返り</h2></div>
+          <p class="sec-desc">売れたもの・売れなかったもの、価格設定や販売方法について。</p>
+          <div class="rate-row">
+            <span class="q">価格設定は適切だったか<span class="hint">安すぎて利益が残らない／高くて売れ残る、がなかったか</span></span>
+            <div class="rate-group" data-rate="price">
+              <label><input type="radio" name="r-price" value="とても適切" /><span class="chip">とても適切</span></label>
+              <label><input type="radio" name="r-price" value="おおむね適切" /><span class="chip">おおむね適切</span></label>
+              <label><input type="radio" name="r-price" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-price" value="見直しが必要" /><span class="chip">見直しが必要</span></label>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">在庫・仕入れ量は適切だったか<span class="hint">売り切れ（機会損失）と廃棄ロスのバランス</span></span>
+            <div class="rate-group" data-rate="stock">
+              <label><input type="radio" name="r-stock" value="とても適切" /><span class="chip">とても適切</span></label>
+              <label><input type="radio" name="r-stock" value="おおむね適切" /><span class="chip">おおむね適切</span></label>
+              <label><input type="radio" name="r-stock" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-stock" value="見直しが必要" /><span class="chip">見直しが必要</span></label>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">決済・会計まわりはスムーズだったか<span class="hint">現金・電子決済の対応、行列、釣り銭、精算作業など</span></span>
+            <div class="rate-group" data-rate="payment">
+              <label><input type="radio" name="r-payment" value="とてもスムーズ" /><span class="chip">とてもスムーズ</span></label>
+              <label><input type="radio" name="r-payment" value="おおむねスムーズ" /><span class="chip">おおむねスムーズ</span></label>
+              <label><input type="radio" name="r-payment" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-payment" value="課題が多かった" /><span class="chip">課題が多かった</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="full">
+              <label class="flabel" for="s-best">よく売れたもの・時間帯と、その理由</label>
+              <textarea id="s-best" placeholder="例：焼きそばは12時台に集中して完売。立地と匂いの訴求が効いたと思う。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="s-worst">売れ残ったもの・伸び悩んだ企画と、その理由</label>
+              <textarea id="s-worst" placeholder="例：◯◯は導線の奥で認知されず売れ残り。看板とSNS告知が不足していた。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="s-next">来年の販売に向けた改善案<span class="hint">価格、メニュー構成、販売場所、告知方法、決済手段など具体的に。</span></label>
+              <textarea id="s-next" class="tall" placeholder="例：人気店は事前整理券制にする。電子決済を全店に広げる。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5 シフト編成 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">5</span><h2>シフト編成の振り返り</h2></div>
+          <p class="sec-desc">人員配置、ピーク対応、休憩や引き継ぎについて。当日は3部制（第1部 10:00〜12:00／第2部 12:00〜14:00／第3部 14:00〜16:00、集合は各回30分前）で、当日ポストは全17種でした。下の「当日のシフト体制」にあらかじめ記入しています。実態と違う部分があれば直してください。</p>
+          <div class="grid" style="margin-bottom:14px">
+            <div class="full">
+              <label class="flabel" for="sh-system">当日のシフト体制<span class="hint">シフト表をもとに記入済みです。必要に応じて修正してください。</span></label>
+              <textarea id="sh-system" class="tall">3部制
+・第1部：9:30集合、10:00〜12:00
+・第2部：11:30集合、12:00〜14:00
+・第3部：13:30集合、14:00〜16:00
+※VRのみ別時間（1部 11:00〜13:00／2部 14:00〜16:00）
+※500歩サッカーお手伝い：9:30〜13:00
+
+当日のポスト（全17種）：
+フランクフルト、焼き鳥、チュロス、ラムネ、ストラックアウト、輪投げ、スーパーボールすくい、抽選会、MIZUNOワークショップ、入口受付、巡回・案内、正門・駐輪場の警備、エア・ウォーターエントランスサポート、大ホール企画 誘導・呼び込み、ラグビー観戦スタッフ、VR、500歩サッカー</textarea>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">人員の過不足はなかったか<span class="hint">ピーク時の不足、閑散時の余り</span></span>
+            <div class="rate-group" data-rate="shift-balance">
+              <label><input type="radio" name="r-shift-balance" value="適正だった" /><span class="chip">適正だった</span></label>
+              <label><input type="radio" name="r-shift-balance" value="おおむね適正" /><span class="chip">おおむね適正</span></label>
+              <label><input type="radio" name="r-shift-balance" value="偏りがあった" /><span class="chip">偏りがあった</span></label>
+              <label><input type="radio" name="r-shift-balance" value="大きく不足／余剰" /><span class="chip">大きく不足／余剰</span></label>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">シフトの組み方・決め方は公平で分かりやすかったか<span class="hint">希望の集め方、確定のタイミング、変更連絡のしやすさ</span></span>
+            <div class="rate-group" data-rate="shift-fair">
+              <label><input type="radio" name="r-shift-fair" value="とても良い" /><span class="chip">とても良い</span></label>
+              <label><input type="radio" name="r-shift-fair" value="おおむね良い" /><span class="chip">おおむね良い</span></label>
+              <label><input type="radio" name="r-shift-fair" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-shift-fair" value="改善が必要" /><span class="chip">改善が必要</span></label>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">当日の欠員・遅刻への対応はできたか</span>
+            <div class="rate-group" data-rate="shift-backup">
+              <label><input type="radio" name="r-shift-backup" value="対応できた" /><span class="chip">対応できた</span></label>
+              <label><input type="radio" name="r-shift-backup" value="なんとか対応した" /><span class="chip">なんとか対応した</span></label>
+              <label><input type="radio" name="r-shift-backup" value="混乱した" /><span class="chip">混乱した</span></label>
+              <label><input type="radio" name="r-shift-backup" value="欠員はなかった" /><span class="chip">欠員はなかった</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div>
+              <label class="flabel" for="sh-peak">一番忙しかった時間帯・場所</label>
+              <input type="text" id="sh-peak" placeholder="例：12〜14時、メインステージ前と模擬店エリア" />
+            </div>
+            <div>
+              <label class="flabel" for="sh-short">人が足りなかった／余った場面</label>
+              <input type="text" id="sh-short" placeholder="例：撤収時に不足、午前中の受付は余り気味" />
+            </div>
+            <div class="full">
+              <label class="flabel" for="sh-note">シフト編成で良かった点・困った点<span class="hint">休憩の取り方、引き継ぎ、長時間労働になった人はいなかったか、など。</span></label>
+              <textarea id="sh-note" placeholder="例：2時間交代制で休憩は確保できた。一方で引き継ぎメモがなく、交代直後に混乱した場面があった。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="sh-next">来年のシフト編成への改善案</label>
+              <textarea id="sh-next" placeholder="例：ピーク帯だけ増員する変動シフトにする。予備人員（フリー）を各時間帯に1名置く。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6 企業連携 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">6</span><h2>企業との連携</h2></div>
+          <p class="sec-desc">協賛・出展・協力企業とのやり取りについて。シフト表から分かる連携先（ミズノ株式会社、エア・ウォーター）は、下の「主な連携先と内容」にあらかじめ入れています。</p>
+          <div class="grid">
+            <div>
+              <label class="flabel" for="b-count">連携した企業・団体数</label>
+              <input type="number" id="b-count" inputmode="numeric" min="0" placeholder="0" style="text-align:right" />
+            </div>
+            <div>
+              <label class="flabel" for="b-sponsor">協賛金・協賛品の合計<span class="hint">金額換算できるもののみでOK</span></label>
+              <div class="yen-wrap"><input type="number" id="b-sponsor" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div class="full">
+              <label class="flabel" for="b-names">主な連携先と内容<span class="hint">シフト表から分かる連携先をあらかじめ入れています。内容が違えば直してください。社名の公開範囲に注意。提出先が学外の場合はイニシャル等に変えてください。</span></label>
+              <textarea id="b-names">ミズノ株式会社（MIZUNO）：ワークショップを実施（当日ポスト「MIZUNOワークショップ」）
+エア・ウォーター：エントランスサポート（ポスト名からの推定）</textarea>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">企業との連絡・調整はスムーズだったか<span class="hint">返信の速さ、条件のすり合わせ、当日の対応</span></span>
+            <div class="rate-group" data-rate="biz-comm">
+              <label><input type="radio" name="r-biz-comm" value="とてもスムーズ" /><span class="chip">とてもスムーズ</span></label>
+              <label><input type="radio" name="r-biz-comm" value="おおむねスムーズ" /><span class="chip">おおむねスムーズ</span></label>
+              <label><input type="radio" name="r-biz-comm" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-biz-comm" value="課題が多かった" /><span class="chip">課題が多かった</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="full">
+              <label class="flabel" for="b-good">良かった点・先方からの評価</label>
+              <textarea id="b-good" placeholder="例：当日の来場者数報告を翌日に送ったところ、来年も協賛したいと返信があった。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="b-issue">困った点・トラブルと対応<span class="hint">条件の認識違い、納品遅れ、契約・お礼状まわりなど。</span></label>
+              <textarea id="b-issue" placeholder="例：ロゴ掲載の締切共有が遅れ、先方に確認の手間をかけた。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="b-next">来年への引き継ぎ事項<span class="hint">担当者の連絡先、交渉の経緯、来年もお願いしたい先・やめるべき取り組みなど。</span></label>
+              <textarea id="b-next" class="tall" placeholder="例：協賛依頼は◯月までに送る。担当は◯◯様。実績報告書のフォーマットは共有ドライブに保存済み。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7 事務局連携 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">7</span><h2>事務局との連携</h2></div>
+          <p class="sec-desc">大学事務局・学生支援窓口との手続きや調整について。</p>
+          <div class="rate-row">
+            <span class="q">申請・手続きは期限内に進められたか<span class="hint">施設利用、予算申請、保険、警備・消防関係など</span></span>
+            <div class="rate-group" data-rate="office-proc">
+              <label><input type="radio" name="r-office-proc" value="すべて期限内" /><span class="chip">すべて期限内</span></label>
+              <label><input type="radio" name="r-office-proc" value="おおむね期限内" /><span class="chip">おおむね期限内</span></label>
+              <label><input type="radio" name="r-office-proc" value="遅れたものがあった" /><span class="chip">遅れたものがあった</span></label>
+              <label><input type="radio" name="r-office-proc" value="大きく遅れた" /><span class="chip">大きく遅れた</span></label>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">事務局との情報共有は十分だったか<span class="hint">変更点の伝達、相談のしやすさ、回答の速さ</span></span>
+            <div class="rate-group" data-rate="office-comm">
+              <label><input type="radio" name="r-office-comm" value="十分だった" /><span class="chip">十分だった</span></label>
+              <label><input type="radio" name="r-office-comm" value="おおむね十分" /><span class="chip">おおむね十分</span></label>
+              <label><input type="radio" name="r-office-comm" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-office-comm" value="不足していた" /><span class="chip">不足していた</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="full">
+              <label class="flabel" for="o-good">助かった点・良かった点</label>
+              <textarea id="o-good" placeholder="例：雨天時の会場変更を迅速に調整してもらえた。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="o-issue">困った点・認識のズレがあった点<span class="hint">ルールの把握不足、締切の見落とし、予算執行の制約など。</span></label>
+              <textarea id="o-issue" placeholder="例：領収書の形式要件を知らず、再発行をお願いする場面があった。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="o-next">来年への引き継ぎ事項<span class="hint">手続きの年間スケジュール、担当窓口、早めに動くべき申請など。</span></label>
+              <textarea id="o-next" class="tall" placeholder="例：施設予約は◯月開始直後に動く。予算申請の様式は前年分を流用可。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8 部ごとの振り返り -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">8</span><h2>部ごとの振り返り</h2></div>
+          <p class="sec-desc">企画部・飲食部・広報部、それぞれの部の担当者が記入してください。担当外の部は空欄のままでかまいません。</p>
+
+          <h3 class="sub">企画部</h3>
+          <div class="rate-row">
+            <span class="q">企画部の運営への自己評価</span>
+            <div class="rate-group" data-rate="dept-kikaku">
+              <label><input type="radio" name="r-dept-kikaku" value="とても良い" /><span class="chip">とても良い</span></label>
+              <label><input type="radio" name="r-dept-kikaku" value="おおむね良い" /><span class="chip">おおむね良い</span></label>
+              <label><input type="radio" name="r-dept-kikaku" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-dept-kikaku" value="課題が残った" /><span class="chip">課題が残った</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="full">
+              <label class="flabel" for="dk-work">担当した主な企画・業務</label>
+              <textarea id="dk-work" placeholder="例：ステージ企画の運営、ゲスト調整、タイムスケジュール管理"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="dk-good">良かった点</label>
+              <textarea id="dk-good" placeholder="例：メインステージの転換が予定どおり進み、大きな遅延がなかった。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="dk-issue">課題・反省点</label>
+              <textarea id="dk-issue" placeholder="例：雨天時の代替企画の準備が不足していた。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="dk-next">来年への引き継ぎ事項</label>
+              <textarea id="dk-next" placeholder="例：出演団体との連絡は◯月から開始する。機材リストは共有ドライブに保存済み。"></textarea>
+            </div>
+          </div>
+
+          <h3 class="sub">飲食部</h3>
+          <p class="sec-desc" style="margin-bottom:10px">対象は飲食の模擬店4店舗です：<strong>焼き鳥／チュロス／フランクフルト／ラムネ</strong>。この4店舗の運営・売上・衛生管理などを振り返ってください。</p>
+          <div class="rate-row">
+            <span class="q">飲食部の運営への自己評価</span>
+            <div class="rate-group" data-rate="dept-inshoku">
+              <label><input type="radio" name="r-dept-inshoku" value="とても良い" /><span class="chip">とても良い</span></label>
+              <label><input type="radio" name="r-dept-inshoku" value="おおむね良い" /><span class="chip">おおむね良い</span></label>
+              <label><input type="radio" name="r-dept-inshoku" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-dept-inshoku" value="課題が残った" /><span class="chip">課題が残った</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="full">
+              <label class="flabel" for="di-work">担当した主な業務<span class="hint">対象店舗：焼き鳥／チュロス／フランクフルト／ラムネ</span></label>
+              <textarea id="di-work" placeholder="例：焼き鳥・チュロス・フランクフルト・ラムネの出店調整、衛生管理、食材の共同仕入れ"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="di-good">良かった点</label>
+              <textarea id="di-good" placeholder="例：衛生チェックリストを事前に配布し、当日の指摘事項がほぼなかった。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="di-issue">課題・反省点</label>
+              <textarea id="di-issue" placeholder="例：人気店に列が集中し、通路が塞がれる場面があった。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="di-next">来年への引き継ぎ事項</label>
+              <textarea id="di-next" placeholder="例：保健所への届出は◯月まで。出店マニュアルは今年のものを流用可。"></textarea>
+            </div>
+          </div>
+
+          <h3 class="sub">広報部</h3>
+          <div class="rate-row">
+            <span class="q">広報部の運営への自己評価</span>
+            <div class="rate-group" data-rate="dept-koho">
+              <label><input type="radio" name="r-dept-koho" value="とても良い" /><span class="chip">とても良い</span></label>
+              <label><input type="radio" name="r-dept-koho" value="おおむね良い" /><span class="chip">おおむね良い</span></label>
+              <label><input type="radio" name="r-dept-koho" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-dept-koho" value="課題が残った" /><span class="chip">課題が残った</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div>
+              <label class="flabel" for="ko-sns">SNSのフォロワー増減・反応<span class="hint">分かる範囲で。例：開催期間で＋◯◯人</span></label>
+              <input type="text" id="ko-sns" placeholder="例：Instagram ＋320人、最多リーチ投稿は出店紹介" />
+            </div>
+            <div>
+              <label class="flabel" for="ko-media">配布物・掲載実績<span class="hint">ポスター、パンフレット、メディア掲載など</span></label>
+              <input type="text" id="ko-media" placeholder="例：ポスター◯◯枚、パンフレット◯◯部" />
+            </div>
+            <div class="full">
+              <label class="flabel" for="ko-work">担当した主な業務</label>
+              <textarea id="ko-work" placeholder="例：SNS運用、ポスター・パンフレット制作、当日の案内放送"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="ko-good">良かった点</label>
+              <textarea id="ko-good" placeholder="例：カウントダウン投稿で開催前から来場意欲を高められた。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="ko-issue">課題・反省点</label>
+              <textarea id="ko-issue" placeholder="例：当日の変更情報の発信が遅れ、問い合わせが集中した。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="ko-next">来年への引き継ぎ事項</label>
+              <textarea id="ko-next" placeholder="例：アカウントの引き継ぎは◯月までに。デザインデータの保存場所は共有ドライブ。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9 打ち上げ -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">9</span><h2>打ち上げの振り返り</h2></div>
+          <p class="sec-desc">打ち上げの実施内容と運営について。実施しなかった場合は、その理由だけ書いてください。</p>
+          <div class="rate-row">
+            <span class="q">打ち上げを実施したか</span>
+            <div class="rate-group" data-rate="party-done">
+              <label><input type="radio" name="r-party-done" value="実施した" /><span class="chip">実施した</span></label>
+              <label><input type="radio" name="r-party-done" value="実施しなかった" /><span class="chip">実施しなかった</span></label>
+              <label><input type="radio" name="r-party-done" value="これから実施予定" /><span class="chip">これから実施予定</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div>
+              <label class="flabel" for="p-when">日時・場所</label>
+              <input type="text" id="p-when" placeholder="例：11月◯日 19:00〜、◯◯（店名・エリア）" />
+            </div>
+            <div>
+              <label class="flabel" for="p-count">参加人数</label>
+              <div class="nin-wrap"><input type="number" id="p-count" inputmode="numeric" min="0" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="p-fee">1人あたりの会費</label>
+              <div class="yen-wrap"><input type="number" id="p-fee" inputmode="numeric" placeholder="0" /></div>
+            </div>
+            <div>
+              <label class="flabel" for="p-total">打ち上げの総費用<span class="hint">補助や余剰金からの支出があれば備考に</span></label>
+              <div class="yen-wrap"><input type="number" id="p-total" inputmode="numeric" placeholder="0" /></div>
+            </div>
+          </div>
+          <div class="rate-row">
+            <span class="q">打ち上げの満足度<span class="hint">店選び、料金、雰囲気、参加のしやすさなど全体で</span></span>
+            <div class="rate-group" data-rate="party-sat">
+              <label><input type="radio" name="r-party-sat" value="とても満足" /><span class="chip">とても満足</span></label>
+              <label><input type="radio" name="r-party-sat" value="おおむね満足" /><span class="chip">おおむね満足</span></label>
+              <label><input type="radio" name="r-party-sat" value="どちらともいえない" /><span class="chip">どちらともいえない</span></label>
+              <label><input type="radio" name="r-party-sat" value="不満が残った" /><span class="chip">不満が残った</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="full">
+              <label class="flabel" for="p-good">良かった点<span class="hint">店・メニュー、進行、参加率、雰囲気など。</span></label>
+              <textarea id="p-good" placeholder="例：全学年が混ざる席配置にして、普段話さないメンバー同士の交流が生まれた。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="p-issue">困った点・改善点<span class="hint">集金の手間、予約のタイミング、会費設定、実施しなかった場合はその理由。</span></label>
+              <textarea id="p-issue" placeholder="例：当日の飛び入り参加で人数がずれた。事前集金と人数確定の締切を早めに設定したい。"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="p-next">来年への引き継ぎ事項</label>
+              <textarea id="p-next" placeholder="例：店は◯◯が広くて使いやすい（◯名まで可）。予約は2週間前までに。"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10 総合 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">10</span><h2>総合振り返り</h2></div>
+          <p class="sec-desc">執行部としての運営全体を振り返って。</p>
+          <div class="rate-row">
+            <span class="q">今年のキャンパス祭の運営全体への自己評価</span>
+            <div class="rate-group" data-rate="overall">
+              <label><input type="radio" name="r-overall" value="大成功" /><span class="chip">大成功</span></label>
+              <label><input type="radio" name="r-overall" value="成功" /><span class="chip">成功</span></label>
+              <label><input type="radio" name="r-overall" value="ふつう" /><span class="chip">ふつう</span></label>
+              <label><input type="radio" name="r-overall" value="課題が残った" /><span class="chip">課題が残った</span></label>
+              <label><input type="radio" name="r-overall" value="失敗が多い" /><span class="chip">失敗が多い</span></label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:14px">
+            <div class="full">
+              <label class="flabel" for="g-good">執行部として一番うまくいったこと</label>
+              <textarea id="g-good" class="tall"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="g-issue">一番の課題・反省点</label>
+              <textarea id="g-issue" class="tall"></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="g-next">来年の執行部へ、必ず引き継ぎたいこと（3つまで）</label>
+              <textarea id="g-next" class="tall" placeholder="1. &#10;2. &#10;3. "></textarea>
+            </div>
+            <div class="full">
+              <label class="flabel" for="g-free">その他・自由記述</label>
+              <textarea id="g-free"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11 出力 -->
+        <section class="card">
+          <div class="sec-head"><span class="sec-num">11</span><h2>振り返り文の出力</h2></div>
+          <p class="sec-desc">入力内容を1つの文章にまとめます。コピーして共有したり、ファイルとして保存して引き継ぎ資料に使えます。</p>
+          <div class="out-actions">
+            <button type="button" class="btn primary" id="genBtn">振り返り文を作成する</button>
+            <button type="button" class="btn" id="copyBtn">文章をコピー</button>
+            <button type="button" class="btn" id="dlBtn">ファイルで保存（.md）</button>
+          </div>
+          <textarea id="outputText" readonly placeholder="「振り返り文を作成する」を押すと、ここに入力内容がまとまって表示されます。"></textarea>
+        </section>
+      </form>
+
+      <p class="foot-note">入力した内容はこのページの中だけで処理され、どこにも送信されません。ページを閉じると入力内容は消えるので、最後に必ず出力して保存してください。</p>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      (function () {
+        "use strict";
+        var $ = function (id) { return document.getElementById(id); };
+        var fmt = function (n) { return n.toLocaleString("ja-JP"); };
+        var num = function (id) {
+          var el = $(id);
+          if (!el) return null;
+          var v = el.value.trim();
+          if (v === "") return null;
+          var n = Number(v);
+          return isNaN(n) ? null : n;
+        };
+        var txt = function (id) {
+          var el = $(id);
+          return el ? el.value.trim() : "";
+        };
+        var rate = function (name) {
+          var el = document.querySelector('input[name="' + name + '"]:checked');
+          return el ? el.value : "";
+        };
+
+        /* ---------- store rows ---------- */
+        var storeBody = $("storeBody");
+        function addStoreRow(name, rev, cost) {
+          var tr = document.createElement("tr");
+          tr.innerHTML =
+            '<td data-th="店舗・企画名"><input type="text" class="st-name" placeholder="例：焼きそば" /></td>' +
+            '<td data-th="売上" class="num"><input type="number" class="st-rev" inputmode="numeric" placeholder="0" /></td>' +
+            '<td data-th="費用" class="num"><input type="number" class="st-cost" inputmode="numeric" placeholder="0" /></td>' +
+            '<td data-th="利益" class="num"><span class="row-profit">―</span></td>' +
+            '<td class="del-cell"><button type="button" class="row-del" aria-label="この行を削除">×</button></td>';
+          if (name) tr.querySelector(".st-name").value = name;
+          if (rev != null) tr.querySelector(".st-rev").value = rev;
+          if (cost != null) tr.querySelector(".st-cost").value = cost;
+          tr.querySelector(".row-del").addEventListener("click", function () {
+            tr.remove();
+            recalc();
+          });
+          storeBody.appendChild(tr);
+        }
+        /* 飲食4店舗の費用は打合せ時点の仕入れ見込み額（初期値）。売上は実績不明のため空欄。 */
+        var initialStores = [
+          { name: "焼き鳥", cost: 18300 },
+          { name: "チュロス", cost: 14690 },
+          { name: "フランクフルト", cost: 48350 },
+          { name: "ラムネ", cost: 21000 },
+          { name: "ストラックアウト", cost: null },
+          { name: "輪投げ", cost: null },
+          { name: "スーパーボールすくい", cost: null },
+          { name: "抽選会", cost: null },
+          { name: "MIZUNOワークショップ", cost: null },
+          { name: "VR", cost: null },
+          { name: "500歩サッカー", cost: null }
+        ];
+        for (var i = 0; i < initialStores.length; i++) addStoreRow(initialStores[i].name, null, initialStores[i].cost);
+        $("addStoreBtn").addEventListener("click", function () { addStoreRow("", null, null); });
+
+        function storeRows() {
+          var rows = [];
+          var trs = storeBody.querySelectorAll("tr");
+          for (var i = 0; i < trs.length; i++) {
+            var name = trs[i].querySelector(".st-name").value.trim();
+            var rv = trs[i].querySelector(".st-rev").value.trim();
+            var cv = trs[i].querySelector(".st-cost").value.trim();
+            var rev = rv === "" ? null : Number(rv);
+            var cost = cv === "" ? null : Number(cv);
+            if (isNaN(rev)) rev = null;
+            if (isNaN(cost)) cost = null;
+            rows.push({ name: name, rev: rev, cost: cost, tr: trs[i] });
+          }
+          return rows;
+        }
+
+        /* ---------- calculations ---------- */
+        function recalc() {
+          var visReal = num("n-vis-real");
+          var revReal = num("n-rev-real"), cost = num("n-cost");
+
+          var profit = (revReal != null && cost != null) ? revReal - cost : null;
+          $("c-profit").textContent = profit == null ? "―" : fmt(profit) + " 円";
+          $("c-profit").className = "v" + (profit == null ? "" : profit >= 0 ? " good" : " bad");
+
+          var margin = (revReal && profit != null) ? (profit / revReal * 100) : null;
+          $("c-margin").textContent = margin == null ? "―" : margin.toFixed(1) + " %";
+          var perVis = (visReal && revReal != null) ? Math.round(revReal / visReal) : null;
+          $("c-per-visitor").textContent = perVis == null ? "―" : fmt(perVis) + " 円";
+
+          /* store totals */
+          var rows = storeRows();
+          var tRev = 0, tCost = 0, hasRev = false, hasCost = false;
+          rows.forEach(function (r) {
+            var cell = r.tr.querySelector(".row-profit");
+            if (r.rev != null && r.cost != null) {
+              var p = r.rev - r.cost;
+              cell.textContent = fmt(p);
+              cell.classList.toggle("neg", p < 0);
+            } else {
+              cell.textContent = "―";
+              cell.classList.remove("neg");
+            }
+            if (r.rev != null) { tRev += r.rev; hasRev = true; }
+            if (r.cost != null) { tCost += r.cost; hasCost = true; }
+          });
+          $("t-rev").textContent = hasRev ? fmt(tRev) : "―";
+          $("t-cost").textContent = hasCost ? fmt(tCost) : "―";
+          $("t-profit").textContent = (hasRev && hasCost) ? fmt(tRev - tCost) : "―";
+
+          /* sticky summary */
+          $("sumVisitors").textContent = visReal == null ? "―" : fmt(visReal);
+          $("sumRevenue").textContent = revReal == null ? "―" : fmt(revReal);
+          $("sumCost").textContent = cost == null ? "―" : fmt(cost);
+          var sp = $("sumProfit");
+          sp.textContent = profit == null ? "―" : fmt(profit);
+          sp.classList.toggle("neg", profit != null && profit < 0);
+        }
+        document.addEventListener("input", recalc);
+        recalc();
+
+        /* ---------- toast ---------- */
+        var toastTimer = null;
+        function toast(msg) {
+          var t = $("toast");
+          t.textContent = msg;
+          t.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { t.classList.remove("show"); }, 2600);
+        }
+
+        /* ---------- generate text ---------- */
+        function dash(v) { return v === "" || v == null ? "（未記入）" : v; }
+        function yen(v) { return v == null ? "（未記入）" : fmt(v) + "円"; }
+        function nin(v) { return v == null ? "（未記入）" : fmt(v) + "人"; }
+        function pct(v) { return v == null ? "" : "（" + v + "）"; }
+
+        function buildText() {
+          var L = [];
+          L.push("# キャンパス祭 執行部振り返り");
+          L.push("");
+          L.push("## 1. 記入者・参加メンバー");
+          L.push("- 記入者：" + dash(txt("f-name")));
+          L.push("- 役職・担当：" + dash(txt("f-role")));
+          if (txt("f-members")) L.push("- 参加メンバー：" + txt("f-members"));
+          L.push("- 記入日：" + dash(txt("f-date")));
+          L.push("- 開催日：" + dash(txt("f-event-date")));
+          L.push("");
+
+          var visReal = num("n-vis-real");
+          var revReal = num("n-rev-real"), cost = num("n-cost");
+          var profit = (revReal != null && cost != null) ? revReal - cost : null;
+          var margin = (revReal && profit != null) ? (profit / revReal * 100).toFixed(1) + "%" : null;
+          var perVis = (visReal && revReal != null) ? Math.round(revReal / visReal) : null;
+
+          L.push("## 2. 数値サマリー");
+          L.push("- 来場者数：" + nin(visReal));
+          L.push("- 運営スタッフ総数：" + nin(num("n-staff")));
+          L.push("- 出店・企画数：" + (num("n-booths") == null ? "（未記入）" : fmt(num("n-booths")) + "件"));
+          L.push("- 総売上：" + yen(revReal));
+          L.push("- 総費用：" + yen(cost));
+          L.push("- 総利益：" + yen(profit) + (margin ? "（利益率 " + margin + "）" : ""));
+          L.push("- 確定実績：模擬店総利益 152,225円（総売上・総費用は未集計のため、自動計算とは別に記録）");
+          L.push("- 来場者1人あたり売上：" + yen(perVis));
+          if (txt("n-note")) { L.push("- 備考：" + txt("n-note")); }
+          L.push("");
+
+          L.push("## 3. 店舗・企画別の売上と費用");
+          L.push("※飲食4店舗の費用は、開催前の打合せ時点の仕入れ見込み額を初期値として入れたものです。実績と異なる場合は上書きした値が正です。");
+          var rows = storeRows().filter(function (r) { return r.name || r.rev != null || r.cost != null; });
+          if (rows.length) {
+            L.push("| 店舗・企画名 | 売上 | 費用 | 利益 |");
+            L.push("|---|---|---|---|");
+            var tRev = 0, tCost = 0;
+            rows.forEach(function (r) {
+              var p = (r.rev != null && r.cost != null) ? fmt(r.rev - r.cost) + "円" : "―";
+              L.push("| " + dash(r.name) + " | " + yen(r.rev) + " | " + yen(r.cost) + " | " + p + " |");
+              if (r.rev != null) tRev += r.rev;
+              if (r.cost != null) tCost += r.cost;
+            });
+            L.push("| 合計 | " + fmt(tRev) + "円 | " + fmt(tCost) + "円 | " + fmt(tRev - tCost) + "円 |");
+          } else {
+            L.push("（未記入）");
+          }
+          L.push("");
+          L.push("### 費用の内訳");
+          L.push("- 食材・材料費：" + yen(num("c-material")));
+          L.push("- 備品・レンタル費：" + yen(num("c-rental")));
+          L.push("- 印刷・広報費：" + yen(num("c-print")));
+          L.push("- その他：" + yen(num("c-other")));
+          if (txt("c-note")) { L.push("- メモ：" + txt("c-note")); }
+          L.push("");
+
+          L.push("## 4. 売上面の振り返り");
+          L.push("- 価格設定：" + dash(rate("r-price")));
+          L.push("- 在庫・仕入れ量：" + dash(rate("r-stock")));
+          L.push("- 決済・会計まわり：" + dash(rate("r-payment")));
+          L.push("- よく売れたもの・時間帯と理由：" + dash(txt("s-best")));
+          L.push("- 売れ残ったもの・伸び悩んだ企画と理由：" + dash(txt("s-worst")));
+          L.push("- 来年の販売に向けた改善案：" + dash(txt("s-next")));
+          L.push("");
+
+          L.push("## 5. シフト編成の振り返り");
+          L.push("- 当日のシフト体制：" + dash(txt("sh-system")));
+          L.push("- 人員の過不足：" + dash(rate("r-shift-balance")));
+          L.push("- シフトの組み方・公平さ：" + dash(rate("r-shift-fair")));
+          L.push("- 欠員・遅刻への対応：" + dash(rate("r-shift-backup")));
+          L.push("- 一番忙しかった時間帯・場所：" + dash(txt("sh-peak")));
+          L.push("- 人が足りなかった／余った場面：" + dash(txt("sh-short")));
+          L.push("- 良かった点・困った点：" + dash(txt("sh-note")));
+          L.push("- 来年の改善案：" + dash(txt("sh-next")));
+          L.push("");
+
+          L.push("## 6. 企業との連携");
+          L.push("- 連携した企業・団体数：" + (num("b-count") == null ? "（未記入）" : fmt(num("b-count")) + "社・団体"));
+          L.push("- 協賛金・協賛品の合計：" + yen(num("b-sponsor")));
+          L.push("- 主な連携先と内容：" + dash(txt("b-names")));
+          L.push("- 連絡・調整のスムーズさ：" + dash(rate("r-biz-comm")));
+          L.push("- 良かった点・先方からの評価：" + dash(txt("b-good")));
+          L.push("- 困った点・トラブルと対応：" + dash(txt("b-issue")));
+          L.push("- 来年への引き継ぎ事項：" + dash(txt("b-next")));
+          L.push("");
+
+          L.push("## 7. 事務局との連携");
+          L.push("- 申請・手続きの期限：" + dash(rate("r-office-proc")));
+          L.push("- 情報共有の十分さ：" + dash(rate("r-office-comm")));
+          L.push("- 助かった点・良かった点：" + dash(txt("o-good")));
+          L.push("- 困った点・認識のズレ：" + dash(txt("o-issue")));
+          L.push("- 来年への引き継ぎ事項：" + dash(txt("o-next")));
+          L.push("");
+
+          L.push("## 8. 部ごとの振り返り");
+          L.push("### 企画部");
+          L.push("- 自己評価：" + dash(rate("r-dept-kikaku")));
+          L.push("- 担当した主な企画・業務：" + dash(txt("dk-work")));
+          L.push("- 良かった点：" + dash(txt("dk-good")));
+          L.push("- 課題・反省点：" + dash(txt("dk-issue")));
+          L.push("- 来年への引き継ぎ事項：" + dash(txt("dk-next")));
+          L.push("### 飲食部");
+          L.push("- 自己評価：" + dash(rate("r-dept-inshoku")));
+          L.push("- 担当した主な業務：" + dash(txt("di-work")));
+          L.push("- 良かった点：" + dash(txt("di-good")));
+          L.push("- 課題・反省点：" + dash(txt("di-issue")));
+          L.push("- 来年への引き継ぎ事項：" + dash(txt("di-next")));
+          L.push("### 広報部");
+          L.push("- 自己評価：" + dash(rate("r-dept-koho")));
+          L.push("- SNSのフォロワー増減・反応：" + dash(txt("ko-sns")));
+          L.push("- 配布物・掲載実績：" + dash(txt("ko-media")));
+          L.push("- 担当した主な業務：" + dash(txt("ko-work")));
+          L.push("- 良かった点：" + dash(txt("ko-good")));
+          L.push("- 課題・反省点：" + dash(txt("ko-issue")));
+          L.push("- 来年への引き継ぎ事項：" + dash(txt("ko-next")));
+          L.push("");
+
+          L.push("## 9. 打ち上げの振り返り");
+          L.push("- 実施：" + dash(rate("r-party-done")));
+          L.push("- 日時・場所：" + dash(txt("p-when")));
+          L.push("- 参加人数：" + nin(num("p-count")));
+          L.push("- 1人あたりの会費：" + yen(num("p-fee")));
+          L.push("- 総費用：" + yen(num("p-total")));
+          L.push("- 満足度：" + dash(rate("r-party-sat")));
+          L.push("- 良かった点：" + dash(txt("p-good")));
+          L.push("- 困った点・改善点：" + dash(txt("p-issue")));
+          L.push("- 来年への引き継ぎ事項：" + dash(txt("p-next")));
+          L.push("");
+
+          L.push("## 10. 総合振り返り");
+          L.push("- 運営全体への自己評価：" + dash(rate("r-overall")));
+          L.push("- 一番うまくいったこと：" + dash(txt("g-good")));
+          L.push("- 一番の課題・反省点：" + dash(txt("g-issue")));
+          L.push("- 来年の執行部へ必ず引き継ぎたいこと：" + dash(txt("g-next")));
+          if (txt("g-free")) { L.push("- その他：" + txt("g-free")); }
+          L.push("");
+          return L.join("\n");
+        }
+
+        $("genBtn").addEventListener("click", function () {
+          $("outputText").value = buildText();
+          toast("振り返り文を作成しました");
+          $("outputText").scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+
+        $("copyBtn").addEventListener("click", function () {
+          if (!$("outputText").value) $("outputText").value = buildText();
+          var text = $("outputText").value;
+          function done() { toast("文章をコピーしました"); }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, function () {
+              $("outputText").select();
+              document.execCommand("copy");
+              done();
+            });
+          } else {
+            $("outputText").select();
+            document.execCommand("copy");
+            done();
+          }
+        });
+
+        $("dlBtn").addEventListener("click", function () {
+          if (!$("outputText").value) $("outputText").value = buildText();
+          var blob = new Blob([$("outputText").value], { type: "text/markdown;charset=utf-8" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          var name = txt("f-name") || "執行部";
+          a.href = url;
+          a.download = "キャンパス祭_執行部振り返り_" + name + ".md";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+          toast("ファイルを保存しました");
+        });
+
+        /* prevent accidental form submit */
+        $("reviewForm").addEventListener("submit", function (e) { e.preventDefault(); });
+      })();
+    </script>
+  </body>
+</html>
